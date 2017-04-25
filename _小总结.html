@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <div v-show="see">看见</div>
+    <button v-on:click="show()">按钮</button>
+    <input type="text" v-model="text">
+    <p>
+        {{arr}}
+    </p>
+
+    <p v-for="value in arr">
+        {{value}}
+    </p>
+
+    <b v-for="(k,v) in json">
+        {{v}} ：{{k}}
+    </b>
+
+    <P>
+        {{text}}
+    </P>
+    <div v-bind:style="boboStyle">土豆泥</div>
+</div>
+    <script type="text/javascript">
+        var c=new Vue({
+            
+            el: "#app",
+
+            data: {
+                arr:["book","film","game","wook"],
+                json:{a:"sky",b:"god",c:"money",d:"life"},
+                text:"zhangbobo like",
+                see:true,
+                boboStyle:{
+                    width:"100px",
+                    height:"40px",
+                    background:"black",
+                    color:"yellow",
+                }
+
+            },
+            methods:{
+                show:function(){
+                    this.arr.pop()
+                }
+            },
+            computed: {
+                text:function(){
+                    return this.text.replace("like","love")
+                }
+            }
+            
+        })
+    </script>
+</body>
+</html>
