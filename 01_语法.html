@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<div id="app">
+    <h3>文本书写</h3>
+    <div>
+        Ta 是 {{ country }} 人!
+    </div><br><br><br>
+
+    <h3>绑定属性</h3>
+    <div :id="idTest">
+        该元素有id属性 并被赋值为变量 idTest
+    </div>
+    <div id="idTest">
+        该元素由于 id 前面没写冒号, 所以被赋值的是字符串 'idTest' 而不是变量idTest
+    </div>
+    <div :id="true" :disabled="false" :readonly="true">
+        布尔值的属性  看见没
+        id 的 这个属性的值 可有很多种
+        但是 disabled  readonly 这种属性  它们的值 就只能是 true 或者 false
+        这对布尔值的属性也有效 —— 如果条件被求值为 false 的话该属性会被移除：
+    </div>
+    <div :id=" 'this ' + 'is ' + 'baby'  ">
+        此属性的 id 使用了js 的 表达式
+    </div>
+    <div :id=" 'baby'.charAt(1)  ">
+        甚至还可以调用对象的方法
+    </div> <br><br><br>
+
+    <h3>v-if VS v-show</h3>
+    <div v-if="true"> v-if 的值为 true </div>
+    <div v-if="false"> v-if 的值为 false </div>
+    <div v-show="true"> v-show 的值为 ture </div>
+    <div v-show="false"> v-show 的值为 false </div> <br><br><br>
+
+    <h3>支持参数的指令</h3>
+    <div >
+        <a v-bind:href="'www.baidu.com'">v-bind 和 v-on 等指令支持参数</a>
+    </div> <br><br><br> 
+
+
+</div>
+
+<script type="text/javascript">
+
+// 起步需要初始化一个 vue 实例  [ 上网查看 实例 和 对象的区别 ]
+var vue = new Vue({
+    el: "#app",  // 实例需要挂载在一个 dom 节点上
+    data: { // 实例内的数据, 可以直接写在 html 上
+        country: "中国",
+        idTest: "div-test-id",
+    }
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+
+<div id="app">
+    <p>原消息: "{{ message }}"</p>
+    <p>消息反转: "{{ reversedMessage }}"</p>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+// 初始化vue实例
+var vue = new Vue({
+    el: "#app",
+    data: { // 实例内数据
+        message: "hello baby",
+    },
+    computed: { // 实例内的计算数据
+        reversedMessage: function () {
+            // reversedMessage 就是计算属性的名字
+            // this 表示当前vue实例
+            // this.message 就表示当前vue实例的 message 数据 
+            // 这里计算属性是依赖于 message 这个属性的值的
+            return this.message.split(" ").reverse().join(" "); // 返回值就是计算属性的值
+        }
+    },
+    watch: { // 监听器: 监听属性的变化
+        message: function (newVal) { // 当 message 属性发生变化是 就会触发这个函数
+            console.log("message is chenged!");
+        }
+    },
+    mounted: function () { // 当页面加载完成执行  类似于 window.onload
+        // 此处结合下面的定时函数用到闭包
+        var vue = this;
+        var messageList = [
+            "hello baby",
+            "hello vanny",
+            "i love you",
+        ];
+        var i = 0;
+        setInterval(function () {
+            vue.message = messageList[i];
+            i++;
+            if (i == 2) i = 0; // 简写
+        }, 2000);
+    }
+})
+</script>
+
+</body>
+</html>
