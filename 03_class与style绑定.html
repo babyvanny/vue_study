@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+
+<style>
+.input-style1 {
+    background: black;
+    color: white;
+}
+.input-style2 {
+    background: pink;
+    color: black;
+}
+.input-style3 {
+    background: yellow;
+    color: red;
+}
+</style>
+<div id="app">
+    <h3>class</h3>
+    <hr>
+    <h5>对象语法</h5>
+    <p>
+        <!-- 
+            1、 class 变为一个动态量 :class
+            2、 其次用对象方式填入原先 class
+            3、 key 是class名, 值控制是否生成此类
+            4、 可以用 data 中的数据去控制
+            5、 进而可以直接使用 data 中的对象去控制 class
+         --> 
+        <input :class="classData" type="text">
+        <button @click="changeInputClass">变换输入框样式</button>
+    </p>
+
+    <h5>数组语法</h5>
+    <p>
+        <input :class="[ classFlg ? 'input-style1' : 'input-style2' ]" type="text">
+        <button @click="changeInputClassArray">变换输入框样式</button>
+    </p>
+
+    <br><br><br>
+    <h3>style</h3>
+    <h5>对象语法</h5>
+    <p>
+        <input :style="styleObject1"  type="text">
+        <button @click="changeInputStyle">变换输入框样式</button>
+    </p>
+    <h5>数组语法</h5>
+    <p>
+        <!-- 可以把两个style对象合并到一块 -->
+        <input :style="[ styleObject1, styleObject2 ]"  type="text">
+
+        <button @click="changeInputStyle">变换输入框样式</button>
+    </p>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+var App = new Vue({
+    el: '#app',
+    data: {
+        test: true,
+        classData: {
+            'example-1': true,
+            'input-style1': true,
+            'input-style2': false,
+            'input-style3': false,
+        },
+        // classDataArray: [ 'example-1', 'input-style1' ]
+        classFlg: false,
+        styleObject1: {
+            background: "black",
+            color: "white",
+        },
+        styleObject2: {
+            border: "solid 2px red"
+        } 
+    },
+    methods: {
+        changeInputClass: function () {
+            if (this.classData['input-style1'] == true) {
+                this.classData['input-style1'] = false;
+                this.classData['input-style2'] = true;
+            } else {
+                this.classData['input-style1'] = true;
+                this.classData['input-style2'] = false;
+            }
+        },
+        changeInputClassArray: function () {
+            this.classFlg = !this.classFlg;
+        },
+        changeInputStyle: function () {
+            this.styleObject1.background = "pink";
+            this.styleObject1.color = "black";
+
+            // yes 这就是vue的精髓
+            // 不关注html  只关注数据  任何东西都是数据
+            // 我只需要改变数据就行  数据一变化  页面的表现形式就变化
+            // 不需要 找元素 还得去改变样式   读一遍
+            // 
+            // 你再想想jQuery  jq的逻辑是  找到元素 然后去改变样式
+            // 如果页面复杂 你就得去找n 多的元素
+            // 到处都是 $() $() 找dom元素 需要遍历dom 结构  比较消耗浏览器资源的 懂？
+        }
+    }
+})
+</script>
+</body>
+</html>
